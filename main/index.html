@@ -1,0 +1,123 @@
+<html>
+  <head>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/css/bootstrap.min.css" rel='stylesheet' type='text/css'>
+    <link href="/static/css/metricsgraphics.css" rel='stylesheet' type='text/css'>
+    <link href="/static/css/metricsgraphics-demo.css" rel='stylesheet' type='text/css'>
+    <link href="/static/css/narrow.css" ref='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">About</a></li>
+            <li role="presentation"><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Log Monitor beta</h3>
+      </div>
+      <div class="jumbotron">
+        <div id='ufo-sightings'></div>
+        <div id='legend' class="text-center"></div>
+        <div id='ac'></div>
+        <div id='ac_legend' class="text-center"></div>
+      </div>
+    
+      <footer class="footer">
+        <p>&copy; Baidu</p>
+      </footer>
+    </div>
+  </body>
+  
+  <script src="/static/js/jquery-2.1.4.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/d3.min.js"></script>
+  <script src="/static/js/metricsgraphics.min.js"></script>
+  <script src="/static/js/parseMetric.js"></script>
+  <script>
+    $.ajax({
+    url: "/query/static/?db=webproxy",
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    async: true,
+    success: function (data) {
+        console.log(data);
+        jsonData = parseMetric(data);
+
+        MG.data_graphic({
+            title: "Webproxy Log Data",
+            description: "webproxy tm, btm, ctm 90 percentile data plot",
+            data: jsonData.result,
+            area: false,
+            width: 650,
+            height: 300,
+            target: '#ufo-sightings',
+            legend: jsonData.legend,
+            legend_target: '#legend',
+            x_accessor: 'time',
+            y_accessor: 'percentile',
+            baselines: [{value: 4, label: 'a baseline'}],
+        })    
+    },
+    error: function(result) {
+        console.log("get tsv data failed!");
+    }
+    }).done(function() {console.log("done!");});
+
+    $.ajax({
+    url: "/query/static/?db=ac",
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    async: true,
+    success: function (data) {
+        console.log(data);
+        jsonData = parseMetric(data);
+
+        MG.data_graphic({
+            title: "Ac Log Data",
+            description: "Ac tm, GT, FT 90 percentile point plot",
+            data: jsonData.result,
+            area: false,
+            width: 650,
+            height: 300,
+            target: '#ac',
+            legend: jsonData.legend,
+            legend_target: '#ac_legend',
+            x_accessor: 'time',
+            y_accessor: 'percentile',
+            baselines: [{value: 2, label: 'a baseline'}],
+        })    
+    },
+    error: function(result) {
+        console.log("get tsv data failed!");
+    }
+    }).done(function() {console.log("done!");});
+
+
+    // function tsvJSON(tsv){
+    //     var lines=$.trim(tsv).split("\n");
+    //     var result = [];
+    //     var headers=lines[0].split("\t");
+
+    //     for(var i=1;i<lines.length;i++){
+    //         var obj = {};
+    //         var currentline=lines[i].split("\t");
+    //         for(var j=0;j<headers.length;j++){
+    //             if (headers[j] == 'time') {
+    //                 currentline[j] = new Date(currentline[j]);
+    //             }
+    //             obj[headers[j]] = currentline[j];
+    //         }
+    //         result.push(obj);
+    //     }
+    //     return result;
+    // }
+  </script>
+</html>
