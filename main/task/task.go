@@ -17,21 +17,21 @@ import (
 var baseDirWebproxy string = "/home/users/liaosiwei/debug_case/size_case/"
 var baseDirAc string = "/home/users/liaosiwei/debug_log/"
 
-var config setting.Configuration = setting.config
+var config setting.Configuration = setting.Config
 
 func Start() {
 	_, err := scheduler.Schedule(runWebproxyStatic, config.Webproxy.Schedule...)
 	if err != nil {
 		log.Fatal("start webproxy static task failed")
 	}
-	_, err = scheduler.Schedule(runAcStatic, config.ac.Schedule...)
+	_, err = scheduler.Schedule(runAcStatic, config.Ac.Schedule...)
 	if err != nil {
 		log.Fatal("start ac static task failed")
 	}
 }
 
 func runWebproxyStatic() {
-	_, err := shcmd.RunWithin(config.Webproxy.Cmd, config.Webproxy.Timeout*time.Hour)
+	_, err := shcmd.RunWithin(config.Webproxy.Cmd, time.Duration(config.Webproxy.Timeout)*time.Hour)
 	if err != nil {
 		log.Fatal("run webproxy static task failed")
 		return
@@ -40,7 +40,7 @@ func runWebproxyStatic() {
 }
 
 func runAcStatic() {
-	_, err := shcmd.RunWithin(config.Ac.Cmd, config.Ac.Timeout*time.Hour)
+	_, err := shcmd.RunWithin(config.Ac.Cmd, time.Duration(config.Ac.Timeout)*time.Hour)
 	if err != nil {
 		log.Fatal("run ac static task failed")
 	}

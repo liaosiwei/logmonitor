@@ -11,6 +11,6 @@ func TestLoad(t *testing.T) {
 	if err != nil {
 		t.Error("load config failed")
 	}
-	str, _ := json.MarshalIndent(config, "", "\t")
+	str, _ := json.MarshalIndent(Config, "", "\t")
 	fmt.Println(string(str))
 }

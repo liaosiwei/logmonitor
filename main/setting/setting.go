@@ -19,13 +19,13 @@ type Configuration struct {
 	Ac       Assembler
 }
 
-var config Configuration
+var Config Configuration
 
 func Load() error {
 	file, _ := os.Open("conf.json")
 	decoder := json.NewDecoder(file)
 
-	err := decoder.Decode(&config)
+	err := decoder.Decode(&Config)
 	if err != nil {
 		log.Fatal("load config file wrong", err)
 		return err
