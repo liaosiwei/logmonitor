@@ -14,9 +14,6 @@ import (
 	"github.com/logmonitor/shcmd"
 )
 
-var baseDirWebproxy string = "/home/users/liaosiwei/debug_case/size_case/"
-var baseDirAc string = "/home/users/liaosiwei/debug_log/"
-
 var config setting.Configuration = setting.Config
 
 func Start() {

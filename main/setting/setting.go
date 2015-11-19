@@ -22,12 +22,16 @@ type Configuration struct {
 var Config Configuration
 
 func Load(filepath string) error {
-	file, _ := os.Open(filepath)
+	file, err := os.Open(filepath)
+	if err != nil {
+		log.Fatal("open file failed: ", filepath)
+		return err
+	}
 	decoder := json.NewDecoder(file)
 
-	err := decoder.Decode(&Config)
+	err = decoder.Decode(&Config)
 	if err != nil {
-		log.Fatal("load config file wrong", err)
+		log.Fatal("load config file wrong in setting.Load ", err)
 		return err
 	}
 	return nil
