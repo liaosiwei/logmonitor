@@ -17,11 +17,11 @@ var baseDirWebproxy string = "/home/users/liaosiwei/debug_case/size_case/"
 var baseDirAc string = "/home/users/liaosiwei/debug_log/"
 
 func Start() {
-	_, err := scheduler.Schedule(runWebproxyStatic, 0, 0, 1, 0, 1, 0)
+	_, err := scheduler.Schedule(runWebproxyStatic, 0, 0, 1, 14, 21, 0)
 	if err != nil {
 		log.Fatal("start webproxy static task failed")
 	}
-	_, err = scheduler.Schedule(runAcStatic, 0, 0, 1, 0, 2, 0)
+	_, err = scheduler.Schedule(runAcStatic, 0, 0, 1, 14, 21, 0)
 	if err != nil {
 		log.Fatal("start ac static task failed")
 	}

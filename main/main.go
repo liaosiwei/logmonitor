@@ -38,5 +38,5 @@ func main() {
 	http.HandleFunc("/query/static/", beforeHandler(views.StaticQuery))
 	http.HandleFunc("/static/", beforeHandler(staticFileHandler))
 	http.HandleFunc("/", beforeHandler(indexHandler))
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8001", nil)
 }
