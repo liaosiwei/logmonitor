@@ -1,10 +1,12 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"path"
 	"strings"
 
+	"github.com/logmonitor/main/setting"
 	"github.com/logmonitor/main/task"
 	"github.com/logmonitor/main/views"
 )
@@ -30,6 +32,10 @@ func beforeHandler(fn func(http.ResponseWriter, *http.Request)) http.HandlerFunc
 }
 
 func init() {
+	if err := setting.Load(); err != nil {
+		log.Fatal("load setting failed, task will not start")
+		return
+	}
 	task.Start()
 }
 

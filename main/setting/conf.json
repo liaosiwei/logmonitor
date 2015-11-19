@@ -1,0 +1,16 @@
+{
+    "Webproxy": {
+        "DbName": "webproxy",
+        "File": "/home/users/liaosiwei/debug_case/size_case/myresult.txt",
+        "Cmd": "sh /home/users/liaosiwei/debug_case/size_case/mycrontab.sh",
+        "Timeout": 5,
+        "Schedule": [0, 0, 1, 0, 21, 0]
+    },
+    "Ac": {
+        "DbName": "ac",
+        "File": "/home/users/liaosiwei/debug_log/result.txt",
+        "Cmd": "sh /home/users/liaosiwei/debug_log/mycrontab.sh",
+        "Timeout": 5,
+        "Schedule": [0, 0, 1, 0, 21, 0]
+    }
+}
