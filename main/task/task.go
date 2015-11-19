@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"fmt"
 
 	"github.com/logmonitor/influx"
 	"github.com/logmonitor/main/setting"
@@ -14,9 +15,10 @@ import (
 	"github.com/logmonitor/shcmd"
 )
 
-var config setting.Configuration = setting.Config
+var config setting.Configuration
 
 func Start() {
+	config = setting.Config
 	_, err := scheduler.Schedule(runWebproxyStatic, config.Webproxy.Schedule...)
 	if err != nil {
 		log.Fatal("start webproxy static task failed")
