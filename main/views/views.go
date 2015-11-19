@@ -41,10 +41,10 @@ func StaticQuery(w http.ResponseWriter, r *http.Request) {
 	c := client.GetClientInstance()
 	var queryStr string
 	if database == "ac" {
-		queryStr = "select * from tm, GT, FT where time > now() - 1w and time <= now() group by time(1d) fill(0)"
+		queryStr = "select * from tm, GT, FT where time > now() - 1w and time <= now() fill(0)"
 	}
 	if database == "webproxy" {
-		queryStr = "select * from tm, btm, ctm, size where time > now() - 1w and time <= now() group by time(1d) fill(0)"
+		queryStr = "select * from tm, btm, ctm, size where time > now() - 1w and time <= now() fill(0)"
 	}
 	res, err := c.QueryByRaw(database, queryStr)
 	if err != nil {
