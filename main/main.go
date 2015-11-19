@@ -32,7 +32,7 @@ func beforeHandler(fn func(http.ResponseWriter, *http.Request)) http.HandlerFunc
 }
 
 func init() {
-	if err := setting.Load(); err != nil {
+	if err := setting.Load("setting/config.json"); err != nil {
 		log.Fatal("load setting failed, task will not start")
 		return
 	}

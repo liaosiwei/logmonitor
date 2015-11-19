@@ -7,7 +7,7 @@ import (
 )
 
 func TestLoad(t *testing.T) {
-	err := Load()
+	err := Load("config.json")
 	if err != nil {
 		t.Error("load config failed")
 	}
