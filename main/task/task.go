@@ -77,6 +77,7 @@ func collectWebproxyStatic() {
 			if err != nil {
 				log.Fatal("write database failed")
 			}
+			count += 1
 		}
 	}
 	if err := scanner.Err(); err != nil {
@@ -118,6 +119,7 @@ func collectAcStatic() {
 			if err != nil {
 				log.Fatal("write ac database failed")
 			}
+			count += 1
 		}
 	}
 	if err := scanner.Err(); err != nil {
