@@ -7,7 +7,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	"fmt"
 
 	"github.com/logmonitor/influx"
 	"github.com/logmonitor/main/setting"
