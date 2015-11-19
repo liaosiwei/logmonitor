@@ -21,8 +21,8 @@ type Configuration struct {
 
 var Config Configuration
 
-func Load(file string) error {
-	file, _ := os.Open(file)
+func Load(filepath string) error {
+	file, _ := os.Open(filepath)
 	decoder := json.NewDecoder(file)
 
 	err := decoder.Decode(&Config)
