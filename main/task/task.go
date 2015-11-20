@@ -62,6 +62,10 @@ func collectWebproxyStatic() {
 		"tm", "btm", "ctm", "size",
 	}
 	tags := map[string]string{}
+
+	now := time.Now()
+	yesterday := now.AddDate(0, 0, -1)
+	timestap := time.Date(yesterday.Year(), yesterday.Month(), yesterday.Day(), 0, 0, 0, 0, time.Local)
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
 		if line == "90%" {
@@ -74,7 +78,8 @@ func collectWebproxyStatic() {
 			fields := map[string]interface{}{
 				"value": value,
 			}
-			err := c.Write(config.Webproxy.DbName, measure[count], tags, fields, time.Now())
+
+			err := c.Write(config.Webproxy.DbName, measure[count], tags, fields, timestap)
 			if err != nil {
 				log.Fatal("write database failed")
 			}
@@ -103,6 +108,11 @@ func collectAcStatic() {
 		"tm", "GT", "FT",
 	}
 	tags := map[string]string{}
+
+	now := time.Now()
+	yesterday := now.AddDate(0, 0, -1)
+	timestap := time.Date(yesterday.Year(), yesterday.Month(), yesterday.Day(), 0, 0, 0, 0, time.Local)
+
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
 		if strings.HasSuffix(line, "point") {
@@ -116,7 +126,7 @@ func collectAcStatic() {
 			fields := map[string]interface{}{
 				"value": value,
 			}
-			err := c.Write(config.Ac.DbName, measure[count], tags, fields, time.Now())
+			err := c.Write(config.Ac.DbName, measure[count], tags, fields, timestap)
 			if err != nil {
 				log.Fatal("write ac database failed")
 			}

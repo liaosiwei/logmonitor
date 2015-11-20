@@ -19,7 +19,7 @@ function parseMetric(influx_data) {
                     if (values[j][k] == null) {
                         values[j][k] = 0;
                     } else {
-                        values[j][k] = parseFloat(values[j][k]) / 1000;
+                        values[j][k] = parseFloat(values[j][k]);
                     }
                 }
                 obj1[columns[k]] = values[j][k];
