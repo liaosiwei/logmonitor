@@ -41,6 +41,7 @@ func runAcStatic() {
 	_, err := shcmd.RunWithin(config.Ac.Cmd, time.Duration(config.Ac.Timeout)*time.Hour)
 	if err != nil {
 		log.Fatal("run ac static task failed")
+		return
 	}
 	collectAcStatic()
 }

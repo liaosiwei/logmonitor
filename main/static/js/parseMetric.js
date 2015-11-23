@@ -13,7 +13,7 @@ function parseMetric(influx_data) {
             for (var k = 0; k < columns.length; k++) {
                 if (columns[k] == "time") {
                     var d = new Date(values[j][k]);
-                    values[j][k] = new Date(d.setTime( d.getTime() + d.getTimezoneOffset()*60*1000));
+                    values[j][k] = new Date(d.setTime( d.getTime() + 8*60*1000));
                 }
                 if (k == columns.length - 1) {
                     if (values[j][k] == null) {
