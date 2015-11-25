@@ -35,16 +35,18 @@ func RealtimeQuery(w http.ResponseWriter, r *http.Request) {
 
 func StaticQuery(w http.ResponseWriter, r *http.Request) {
 	database := r.URL.Query().Get("db")
+	from := r.URL.Query().Get("from")
+	to := r.URL.Query().Get("to")
 	if len(database) == 0 {
 		return
 	}
 	c := client.GetClientInstance()
 	var queryStr string
 	if database == "ac" {
-		queryStr = "select * from tm, GT, FT where time > now() - 1w and time <= now() fill(0)"
+		queryStr = fmt.Sprintf("select * from tm, GT, FT where time >= '%s' and time <= '%s' fill(0)", from, to)
 	}
 	if database == "webproxy" {
-		queryStr = "select * from tm, btm, ctm, size where time > now() - 1w and time <= now() fill(0)"
+		queryStr = fmt.Sprintf("select * from tm, btm, ctm, size where time >= '%s' and time <= '%s' fill(0)", from, to)
 	}
 	res, err := c.QueryByRaw(database, queryStr)
 	if err != nil {

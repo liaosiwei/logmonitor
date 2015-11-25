@@ -1,6 +1,8 @@
 function parseMetric(influx_data) {
     var result = [];
     var series = influx_data[0].Series;
+    if (series == null)
+        return {'legend': null, 'result': null};
     var columns = influx_data[0].Series[0].columns;
     var legend = [];
     for (var i = 0; i < series.length; i++) {
