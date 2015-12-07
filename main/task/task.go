@@ -109,7 +109,7 @@ func collectAttrStatic() {
 	now := time.Now()
 	yesterday := now.AddDate(0, 0, -1)
 	timestap := time.Date(yesterday.Year(), yesterday.Month(), yesterday.Day(), 0, 0, 0, 0, time.Local)
-
+	count := 0
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
 		value, _ := strconv.ParseFloat(line, 32)
