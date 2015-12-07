@@ -17,6 +17,10 @@ type Assembler struct {
 type Configuration struct {
 	Webproxy Assembler
 	Ac       Assembler
+	Attr     struct {
+		DbName string
+		File   string
+	}
 }
 
 var Config Configuration

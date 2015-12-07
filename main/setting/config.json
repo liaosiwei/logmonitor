@@ -12,5 +12,9 @@
         "Cmd": "sh /home/users/liaosiwei/debug_log/mycrontab.sh",
         "Timeout": 5,
         "Schedule": [0, 0, 1, 0, 21, 0]
+    },
+    "Attr": {
+        "DbName": "attr",
+        "File": "/home/users/liaosiwei/debug_log/attr.txt"
     }
 }

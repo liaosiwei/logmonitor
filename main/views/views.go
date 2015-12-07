@@ -48,6 +48,9 @@ func StaticQuery(w http.ResponseWriter, r *http.Request) {
 	if database == "webproxy" {
 		queryStr = fmt.Sprintf("select * from tm, btm, ctm, size where time >= '%s' and time <= '%s' fill(0)", from, to)
 	}
+	if database == "attr" {
+		queryStr = fmt.Sprintf("select * from tm, dt, fct where time >= '%s' and time <= '%s' fill(0)", from, to)
+	}
 	res, err := c.QueryByRaw(database, queryStr)
 	if err != nil {
 		log.Fatal("query database failed: ", database)

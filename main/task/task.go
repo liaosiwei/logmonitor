@@ -92,6 +92,42 @@ func collectWebproxyStatic() {
 	}
 }
 
+func collectAttrStatic() {
+	file, err := os.Open(config.Attr.File)
+	if err != nil {
+		log.Fatal(err)
+	}
+	c := client.GetClientInstance()
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+
+	measure := [...]string{
+		"tm", "dt", "fct",
+	}
+	tags := map[string]string{}
+
+	now := time.Now()
+	yesterday := now.AddDate(0, 0, -1)
+	timestap := time.Date(yesterday.Year(), yesterday.Month(), yesterday.Day(), 0, 0, 0, 0, time.Local)
+
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		value, _ := strconv.ParseFloat(line, 32)
+		value = value / 1000000
+		fields := map[string]interface{}{
+			"value": value,
+		}
+		err := c.Write(config.Attr.DbName, measure[count], tags, fields, timestap)
+		if err != nil {
+			log.Fatal("write ac database failed")
+		}
+		count += 1
+	}
+	if err := scanner.Err(); err != nil {
+		log.Fatal("reading standard input:", err)
+	}
+}
+
 func collectAcStatic() {
 	file, err := os.Open(config.Ac.File)
 	if err != nil {
@@ -137,4 +173,5 @@ func collectAcStatic() {
 	if err := scanner.Err(); err != nil {
 		log.Fatal("reading standard input:", err)
 	}
+	collectAttrStatic()
 }
