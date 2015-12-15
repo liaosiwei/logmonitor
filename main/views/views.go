@@ -43,7 +43,7 @@ func StaticQuery(w http.ResponseWriter, r *http.Request) {
 	c := client.GetClientInstance()
 	var queryStr string
 	if database == "ac" {
-		queryStr = fmt.Sprintf("select * from tm, GT, FT where time >= '%s' and time <= '%s' fill(0)", from, to)
+		queryStr = fmt.Sprintf("select * from tm, GT, FT, lbt where time >= '%s' and time <= '%s' fill(0)", from, to)
 	}
 	if database == "webproxy" {
 		queryStr = fmt.Sprintf("select * from tm, btm, ctm, size where time >= '%s' and time <= '%s' fill(0)", from, to)

@@ -142,7 +142,7 @@ func collectAcStatic() {
 	flag := 0
 	count := 0
 	measure := [...]string{
-		"tm", "GT", "FT",
+		"tm", "GT", "FT", "lbt",
 	}
 	tags := map[string]string{}
 
