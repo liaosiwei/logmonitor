@@ -43,13 +43,13 @@ func StaticQuery(w http.ResponseWriter, r *http.Request) {
 	c := client.GetClientInstance()
 	var queryStr string
 	if database == "ac" {
-		queryStr = fmt.Sprintf("select * from tm, GT, FT, lbt where time >= '%s' and time <= '%s' fill(0)", from, to)
+		queryStr = fmt.Sprintf("select * from tm, GT, FT, lbt, rGT where time >= '%s' and time <= '%s' fill(0)", from, to)
 	}
 	if database == "webproxy" {
 		queryStr = fmt.Sprintf("select * from tm, btm, ctm, size where time >= '%s' and time <= '%s' fill(0)", from, to)
 	}
 	if database == "attr" {
-		queryStr = fmt.Sprintf("select * from tm, dt, fct where time >= '%s' and time <= '%s' fill(0)", from, to)
+		queryStr = fmt.Sprintf("select * from tm, dt, fct, pt where time >= '%s' and time <= '%s' fill(0)", from, to)
 	}
 	res, err := c.QueryByRaw(database, queryStr)
 	if err != nil {

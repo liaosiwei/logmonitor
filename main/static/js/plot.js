@@ -41,7 +41,7 @@ function plot(begin, end) {
 
         MG.data_graphic({
             title: "Ac 90 Percentile",
-            description: "Ac tm, GT, FT, lbt 90 percentile point plot",
+            description: "Ac tm, GT, FT, lbt, rGT 90 percentile point plot",
             data: jsonData.result,
             area: false,
             width: 580,
@@ -71,7 +71,7 @@ function plot(begin, end) {
 
         MG.data_graphic({
             title: "Attr 90 Percentile",
-            description: "Attr tm, dt, fct 90 percentile point plot",
+            description: "Attr tm, dt, fct, pt 90 percentile point plot",
             data: jsonData.result,
             area: false,
             width: 580,

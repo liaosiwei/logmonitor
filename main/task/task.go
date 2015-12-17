@@ -102,7 +102,7 @@ func collectAttrStatic() {
 	scanner := bufio.NewScanner(file)
 
 	measure := [...]string{
-		"tm", "dt", "fct",
+		"tm", "dt", "fct", "pt",
 	}
 	tags := map[string]string{}
 
@@ -142,7 +142,7 @@ func collectAcStatic() {
 	flag := 0
 	count := 0
 	measure := [...]string{
-		"tm", "GT", "FT", "lbt",
+		"tm", "GT", "FT", "lbt", "rGT",
 	}
 	tags := map[string]string{}
 
